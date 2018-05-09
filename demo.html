@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		ul {
+			list-style: none;
+		}
+		.comment {
+			color: red;
+			font-size: 40px;
+		}
+		.comment li {
+			float: left;
+		}
+	</style>
+
+	<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+	$(function(){
+		var wjx_sel = "★",
+			wjx_none = "☆";
+		$(".comment").on("mouseenter", "li", function(){
+			//prevAll前面所有的兄弟节点
+			$(this).text(wjx_sel)
+				.prevAll()
+				.text(wjx_sel)
+				.end()
+				.nextAll()
+				.text(wjx_none);
+			//纪录用户点击的那个五角星
+			//给点击的li标签添加一个样式类,其他的兄弟节点要移除样式类
+		}).on("click", "li", function(){
+			$(this).addClass('clicked').siblings().removeClass('clicked');
+			//当鼠标移开评分控件的时候，把click之前的（包括自己）五角星全部变成实心的，后面的变成空心的
+		}).on("mouseleave",function(){
+			$(".clicked").text(wjx_sel).prevAll().text(wjx_sel).end().nextAll().text(wjx_none);
+		});
+		
+	});
+	</script>
+</head>
+<body>
+	<ul class="comment">
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+	</ul>
+</body>
+</html>
